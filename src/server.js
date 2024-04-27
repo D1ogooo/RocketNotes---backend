@@ -7,7 +7,7 @@ const routes = require('./routes')
 const app = express();
 app.use(express.json());
 app.use(routes);
-migrationsRun()
+migrationsRun();
 
 app.use((error, req, res, next) => {
   if(error instanceof AppError) {
