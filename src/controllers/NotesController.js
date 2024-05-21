@@ -28,7 +28,7 @@ class NotesController {
       }
     })
 
-    await knex("links").insert(tagsInsert);
+    await knex("tags").insert(tagsInsert);
     response.json();
   }
 
