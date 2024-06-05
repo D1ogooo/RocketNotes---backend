@@ -32,15 +32,15 @@ class usersController {
   }
 
   async update(req, res) {
-    const { name, email } = req.body;
-    const { id } = req.params;
+    const { name, email, password, old_password } = req.body;
+    const user_id = req.params.user.id
 
     try {
       console.log('Tentando conectar ao banco de dados...');
       const database = await sqliteConnection();
       console.log('Conexão estabelecida.');
 
-      const user = await database.get(`SELECT * FROM users WHERE id = ?`, [id]);
+      const user = await database.get(`SELECT * FROM users WHERE id = ?`, [user_id]);
 
       if (!user) {
         console.error('Usuário não encontrado.');
@@ -63,7 +63,7 @@ class usersController {
         email = ?,
         updated_at = ?
         WHERE id = ?`, 
-        [user.name, user.email, new Date(), id]
+        [user.name, user.email, new Date(), user_id]
       );
       console.log('Usuário atualizado com sucesso.');
 
